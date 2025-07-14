@@ -1,0 +1,33 @@
+WTI Daily Direction Analysis Report
+Analysis Period Label: 20200101_to_20211231
+Actual Analyzed Period: 2020-01-01 to 2021-12-31
+Report Generation Date: 2025-07-13 21:19:55
+================================================================================
+
+I. Overall Daily Direction Statistics:
+  Total Trading Days Analyzed: 518
+  UP Days: 280 (54.05%)
+  DOWN Days: 234 (45.17%)
+  Break Even Days: 4 (0.77%)
+
+II. Points Summary (Scaled by 10):
+  Total Scaled Points on UP Days: 2663.60
+  Total Scaled Points on DOWN Days (sum of magnitudes): 2481.60
+  Net Scaled Points (UP Points - DOWN Points): 182.00
+
+III. Longest Consecutive Streaks:
+  Longest UP Streak: 9 days
+  Longest DOWN Streak: 8 days
+  Longest Break Even Streak: 1 days
+
+IV. Daily Direction Distribution by Day of the Week:
+Direction  UP  DOWN  Break Even  Total   UP_%  DOWN_%  Break Even_%
+Day_Name                                                           
+Monday     54    50           0    104  51.92   48.08          0.00
+Tuesday    58    45           1    104  55.77   43.27          0.96
+Wednesday  62    41           2    105  59.05   39.05          1.90
+Thursday   55    49           1    105  52.38   46.67          0.95
+Friday     51    49           0    100  51.00   49.00          0.00
+
+================================================================================
+End of Report

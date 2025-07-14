@@ -1,0 +1,33 @@
+GOLD Daily Direction Analysis Report
+Analysis Period Label: Start_to_End
+Actual Analyzed Period: 2000-01-04 to 2025-05-30
+Report Generation Date: 2025-07-13 21:11:41
+================================================================================
+
+I. Overall Daily Direction Statistics:
+  Total Trading Days Analyzed: 6438
+  UP Days: 3304 (51.32%)
+  DOWN Days: 3086 (47.93%)
+  Break Even Days: 48 (0.75%)
+
+II. Points Summary (Scaled by 10):
+  Total Scaled Points on UP Days: 272946.90
+  Total Scaled Points on DOWN Days (sum of magnitudes): 273209.00
+  Net Scaled Points (UP Points - DOWN Points): -262.10
+
+III. Longest Consecutive Streaks:
+  Longest UP Streak: 11 days
+  Longest DOWN Streak: 15 days
+  Longest Break Even Streak: 2 days
+
+IV. Daily Direction Distribution by Day of the Week:
+Direction   UP  DOWN  Break Even  Total   UP_%  DOWN_%  Break Even_%
+Day_Name                                                            
+Monday     619   633          13   1265  48.93   50.04          1.03
+Tuesday    650   621           8   1279  50.82   48.55          0.63
+Wednesday  682   623          11   1316  51.82   47.34          0.84
+Thursday   658   642           8   1308  50.31   49.08          0.61
+Friday     695   567           8   1270  54.72   44.65          0.63
+
+================================================================================
+End of Report

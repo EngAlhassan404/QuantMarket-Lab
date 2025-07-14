@@ -1,0 +1,33 @@
+USDJPY Daily Direction Analysis Report
+Analysis Period Label: 20240101_to_20241231
+Actual Analyzed Period: 2024-01-01 to 2024-12-31
+Report Generation Date: 2025-07-13 21:27:09
+================================================================================
+
+I. Overall Daily Direction Statistics:
+  Total Trading Days Analyzed: 262
+  UP Days: 152 (58.02%)
+  DOWN Days: 107 (40.84%)
+  Break Even Days: 3 (1.15%)
+
+II. Points Summary (Scaled by 10):
+  Total Scaled Points on UP Days: 986.10
+  Total Scaled Points on DOWN Days (sum of magnitudes): 839.30
+  Net Scaled Points (UP Points - DOWN Points): 146.80
+
+III. Longest Consecutive Streaks:
+  Longest UP Streak: 8 days
+  Longest DOWN Streak: 5 days
+  Longest Break Even Streak: 1 days
+
+IV. Daily Direction Distribution by Day of the Week:
+Direction  UP  DOWN  Break Even  Total   UP_%  DOWN_%  Break Even_%
+Day_Name                                                           
+Monday     34    19           0     53  64.15   35.85          0.00
+Tuesday    27    25           1     53  50.94   47.17          1.89
+Wednesday  35    16           1     52  67.31   30.77          1.92
+Thursday   29    22           1     52  55.77   42.31          1.92
+Friday     27    25           0     52  51.92   48.08          0.00
+
+================================================================================
+End of Report

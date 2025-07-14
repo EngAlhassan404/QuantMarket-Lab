@@ -1,0 +1,33 @@
+EURUSD Daily Direction Analysis Report
+Analysis Period Label: 20110101_to_20131231
+Actual Analyzed Period: 2011-01-03 to 2013-12-31
+Report Generation Date: 2025-07-13 21:18:59
+================================================================================
+
+I. Overall Daily Direction Statistics:
+  Total Trading Days Analyzed: 780
+  UP Days: 395 (50.64%)
+  DOWN Days: 377 (48.33%)
+  Break Even Days: 8 (1.03%)
+
+II. Points Summary (Scaled by 10):
+  Total Scaled Points on UP Days: 23.02
+  Total Scaled Points on DOWN Days (sum of magnitudes): 23.00
+  Net Scaled Points (UP Points - DOWN Points): 0.02
+
+III. Longest Consecutive Streaks:
+  Longest UP Streak: 10 days
+  Longest DOWN Streak: 8 days
+  Longest Break Even Streak: 1 days
+
+IV. Daily Direction Distribution by Day of the Week:
+Direction  UP  DOWN  Break Even  Total   UP_%  DOWN_%  Break Even_%
+Day_Name                                                           
+Monday     73    81           3    157  46.50   51.59          1.91
+Tuesday    89    67           1    157  56.69   42.68          0.64
+Wednesday  70    83           3    156  44.87   53.21          1.92
+Thursday   85    71           0    156  54.49   45.51          0.00
+Friday     78    75           1    154  50.65   48.70          0.65
+
+================================================================================
+End of Report

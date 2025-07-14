@@ -1,0 +1,9 @@
+This file lists the Python packages required to run the QuantMarket-Lab platform.
+Install them all using a single command: pip install -r requirements.txt
+pandas
+numpy
+requests
+PyYAML
+streamlit
+matplotlib
+seaborn

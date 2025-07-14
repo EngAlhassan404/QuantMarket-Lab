@@ -1,0 +1,73 @@
+# =========================================
+# QuantMarket-Lab Master Configuration
+# =========================================
+
+# --- API Settings ---
+# IMPORTANT: Replace "YOUR_API_KEY_HERE" with your actual Alpha Vantage API key.
+api_settings:
+  alpha_vantage_key: "YOUR_API_KEY_HERE"
+  # Delay in seconds between API calls to respect rate limits.
+  api_call_delay_seconds: 20
+
+# --- Backup Settings ---
+# Enable or disable automatic backups before updating data files.
+backup_settings:
+  enable_backups: true
+  # Maximum number of backup files to keep per asset.
+  max_backups_per_asset: 7
+
+# --- Asset Portfolio ---
+# List of all assets to be managed and analyzed by the platform.
+# The 'user_name' is the primary identifier used across the system.
+assets:
+  # --- Forex Assets ---
+  # - {
+  #     user_name: "EURUSD",
+  #     market_type: "Forex",
+  #     av_from: "EUR",
+  #     av_to: "USD",
+  #     type: "FX",
+  #   }
+  - {
+      user_name: "GBPUSD",
+      market_type: "Forex",
+      av_from: "GBP",
+      av_to: "USD",
+      type: "FX",
+    }
+  # - {
+  #     user_name: "USDCHF",
+  #     market_type: "Forex",
+  #     av_from: "USD",
+  #     av_to: "CHF",
+  #     type: "FX",
+  #   }
+  # - {
+  #     user_name: "USDJPY",
+  #     market_type: "Forex",
+  #     av_from: "USD",
+  #     av_to: "JPY",
+  #     type: "FX",
+  #   }
+  # - {
+  #     user_name: "DXY",
+  #     market_type: "Forex",
+  #     av_from: "USD",
+  #     av_to: "SEK",
+  #     type: "FX",
+  #   } # Note: DXY is not directly available, using a proxy like USDSEK or a dedicated source is needed. This is an example.
+
+  # # --- Commodity Assets ---
+  # # Note: Alpha Vantage commodity functions can be inconsistent. Check their docs for the correct function names.
+  # - {
+  #     user_name: "WTI",
+  #     market_type: "Commodity",
+  #     av_function: "WTI",
+  #     type: "COMMODITY",
+  #   }
+  # - {
+  #     user_name: "GOLD",
+  #     market_type: "Commodity",
+  #     av_function: "GOLD",
+  #     type: "COMMODITY",
+  #   }

@@ -1,0 +1,33 @@
+USDCHF Daily Direction Analysis Report
+Analysis Period Label: 20080101_to_20091231
+Actual Analyzed Period: 2008-01-01 to 2009-12-31
+Report Generation Date: 2025-07-13 21:20:22
+================================================================================
+
+I. Overall Daily Direction Statistics:
+  Total Trading Days Analyzed: 523
+  UP Days: 248 (47.42%)
+  DOWN Days: 271 (51.82%)
+  Break Even Days: 4 (0.76%)
+
+II. Points Summary (Scaled by 10):
+  Total Scaled Points on UP Days: 17.26
+  Total Scaled Points on DOWN Days (sum of magnitudes): 19.50
+  Net Scaled Points (UP Points - DOWN Points): -2.24
+
+III. Longest Consecutive Streaks:
+  Longest UP Streak: 6 days
+  Longest DOWN Streak: 7 days
+  Longest Break Even Streak: 1 days
+
+IV. Daily Direction Distribution by Day of the Week:
+Direction  UP  DOWN  Break Even  Total   UP_%  DOWN_%  Break Even_%
+Day_Name                                                           
+Monday     49    55           0    104  47.12   52.88          0.00
+Tuesday    55    49           1    105  52.38   46.67          0.95
+Wednesday  44    60           1    105  41.90   57.14          0.95
+Thursday   50    54           1    105  47.62   51.43          0.95
+Friday     50    53           1    104  48.08   50.96          0.96
+
+================================================================================
+End of Report

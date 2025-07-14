@@ -1,0 +1,33 @@
+GBPUSD Daily Direction Analysis Report
+Analysis Period Label: 20160101_to_20161231
+Actual Analyzed Period: 2016-01-01 to 2016-12-30
+Report Generation Date: 2025-07-14 13:29:04
+================================================================================
+
+I. Overall Daily Direction Statistics:
+  Total Trading Days Analyzed: 261
+  UP Days: 121 (46.36%)
+  DOWN Days: 139 (53.26%)
+  Break Even Days: 1 (0.38%)
+
+II. Points Summary (Scaled by 10):
+  Total Scaled Points on UP Days: 8.59
+  Total Scaled Points on DOWN Days (sum of magnitudes): 10.44
+  Net Scaled Points (UP Points - DOWN Points): -1.85
+
+III. Longest Consecutive Streaks:
+  Longest UP Streak: 6 days
+  Longest DOWN Streak: 6 days
+  Longest Break Even Streak: 1 days
+
+IV. Daily Direction Distribution by Day of the Week:
+Direction  UP  DOWN  Break Even  Total   UP_%  DOWN_%  Break Even_%
+Day_Name                                                           
+Monday     27    25           0     52  51.92   48.08          0.00
+Tuesday    22    30           0     52  42.31   57.69          0.00
+Wednesday  25    27           0     52  48.08   51.92          0.00
+Thursday   25    27           0     52  48.08   51.92          0.00
+Friday     22    30           1     53  41.51   56.60          1.89
+
+================================================================================
+End of Report
