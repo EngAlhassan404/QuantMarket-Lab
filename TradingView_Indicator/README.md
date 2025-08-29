@@ -155,8 +155,10 @@ This tool is designed for the serious trader who seeks an objective, statistical
 Connect with **Eng. Alhassan Ali Mubarak Bahbah** for feedback, questions, or collaboration.
 
 - [**GitHub**](https://github.com/EngAlhassan404)
-- [**Twitter/X**](https://twitter.com/Mazyngo2)
+- [**Twitter/X**](https://twitter.com/EngAlhassan404)
 - [**Instagram**](https://www.instagram.com/k_.x_o/)
+- [**Linkedin**](https://www.linkedin.com/in/eng-alhassan-ali-bahbah-a6620231b)
+
 
 ## 9. Contributing
 
