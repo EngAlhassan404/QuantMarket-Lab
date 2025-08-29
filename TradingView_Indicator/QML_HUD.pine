@@ -1,0 +1,209 @@
+//@version=6
+// -----------------------------------------------------------------------------
+// © 2025 Eng.Alhassan Ali Mubarak Bahbah
+//
+// Title:         QuantMarket Lab: Directional Dashboard
+// Author:        Eng.Alhassan Ali Mubarak Bahbah
+// Version:       5.1
+// Description:   A multi-mode statistical dashboard for analyzing market
+//                directional equilibrium based on candle frequency.
+// -----------------------------------------------------------------------------
+indicator("QuantMarket Lab: Directional Dashboard", "QML-HUD", true)
+
+// =============================================================================
+//                                 USER INPUTS
+// =============================================================================
+
+// --- Analysis Mode Settings ---
+string grp_mode = "1. Analysis Mode"
+string systemMode = input.string("Standard", "System Mode", options=["Standard", "Daily", "Weekly", "Monthly"], group=grp_mode, tooltip="Standard: Uses a fixed lookback period.\nDaily/Weekly/Monthly: Analyzes data from the start of the current session.")
+int minCandles = input.int(10, "Min. Calculation Candles", minval=1, group=grp_mode, tooltip="The minimum number of candles required in a session (Daily, Weekly, Monthly) before statistics are displayed.")
+
+// --- General Settings ---
+string grp_general = "2. General Settings"
+int lookbackPeriod = input.int(252, "Lookback Period", minval=1, group=grp_general, tooltip="Only active when 'System Mode' is set to 'Standard'.")
+bool showNeutral = input.bool(true, "Show Neutral (Doji) Candles?", group=grp_general)
+
+// --- Display Settings ---
+string grp_display = "3. Display Settings"
+string tablePosition = input.string("top_right", "Table Position", options=["top_right", "top_left", "bottom_right", "bottom_left"], group=grp_display)
+string fontSizeOption = input.string("Normal", "Font Size", options=["Small", "Normal", "Large"], group=grp_display)
+
+// --- Color & Thresholds Settings ---
+string grp_colors = "4. Color & Thresholds Settings"
+float moderateThreshold = input.float(55.0, "Moderate Bias Threshold %", minval=50.0, step=0.5, group=grp_colors)
+float extremeThreshold = input.float(70.0, "Extreme Bias Threshold %", minval=50.1, step=0.5, group=grp_colors)
+color equilibriumColor = input.color(color.new(color.gray, 20), "Equilibrium Color", group=grp_colors)
+color moderateUpColor = input.color(color.new(#26A69A, 70), "Moderate Up Color", group=grp_colors)
+color extremeUpColor = input.color(color.new(#26A69A, 40), "Extreme Up Color", group=grp_colors)
+color moderateDownColor = input.color(color.new(#EF5350, 70), "Moderate Down Color", group=grp_colors)
+color extremeDownColor = input.color(color.new(#EF5350, 40), "Extreme Down Color", group=grp_colors)
+color textColor = input.color(color.new(color.white, 0), "Text Color", group=grp_colors)
+
+// =============================================================================
+//                               HELPER FUNCTIONS
+// =============================================================================
+
+// Gets the font size based on user selection.
+f_get_font_size(string sizeOption) =>
+    switch sizeOption
+        "Small" => size.small
+        "Large" => size.large
+        => size.normal
+
+// Gets the background color based on the directional bias percentage.
+f_get_bias_color(float percentage, bool isUp) =>
+    color resultColor = equilibriumColor
+    if percentage >= extremeThreshold
+        resultColor := isUp ? extremeUpColor : extremeDownColor
+    else if percentage >= moderateThreshold
+        resultColor := isUp ? moderateUpColor : moderateDownColor
+    resultColor
+
+// Gets the status text description based on percentages.
+f_get_status_text(float upPerc, float downPerc) =>
+    string statusText = "Equilibrium"
+    if upPerc >= extremeThreshold
+        statusText := "Extreme Upward Bias"
+    else if upPerc >= moderateThreshold
+        statusText := "Moderate Upward Bias"
+    else if downPerc >= extremeThreshold
+        statusText := "Extreme Downward Bias"
+    else if downPerc >= moderateThreshold
+        statusText := "Moderate Downward Bias"
+    statusText
+
+// Draws a simple cell in the table.
+f_cell_simple(table tbl, int col, int row, string txt, string txt_halign, color bgcolor) =>
+    tbl.cell(col, row, txt, text_halign=txt_halign, text_size=f_get_font_size(fontSizeOption), text_color=textColor, bgcolor=bgcolor)
+
+// =============================================================================
+//                                  CALCULATIONS
+// =============================================================================
+
+// Define the current candle's state.
+bool isUp = close > open
+bool isDown = close < open
+
+// Variables to hold the final values for the table display.
+float finalUpCount = 0.0
+float finalDownCount = 0.0
+float finalNeutralCount = 0.0
+float finalTotalCount = 0.0
+string modeLabel = "Lookback Period"
+string modeValue = ""
+
+// Main Logic: Switch between Standard and Session-based modes.
+if systemMode == "Standard"
+    // Standard Mode Logic (rolling window).
+    finalUpCount := math.sum(isUp ? 1 : 0, lookbackPeriod)
+    finalDownCount := math.sum(isDown ? 1 : 0, lookbackPeriod)
+    finalNeutralCount := showNeutral ? math.sum(not isUp and not isDown ? 1 : 0, lookbackPeriod) : 0
+    finalTotalCount := lookbackPeriod
+    modeValue := str.tostring(lookbackPeriod) + " Candles"
+else
+    // Session Mode Logic (Daily, Weekly, Monthly).
+    // Persistent variables to track the session.
+    var int sessionUpCount = 0
+    var int sessionDownCount = 0
+    var int sessionNeutralCount = 0
+    var int barsInSession = 0
+
+    // Detect the start of a new session.
+    bool isNewDay = timeframe.change("D")
+    bool isNewWeek = timeframe.change("W")
+    bool isNewMonth = timeframe.change("M")
+    bool sessionReset = (systemMode == "Daily" and isNewDay) or (systemMode == "Weekly" and isNewWeek) or (systemMode == "Monthly" and isNewMonth)
+
+    // Reset or accumulate the counters.
+    if sessionReset
+        sessionUpCount := isUp ? 1 : 0
+        sessionDownCount := isDown ? 1 : 0
+        sessionNeutralCount := showNeutral and not isUp and not isDown ? 1 : 0
+        barsInSession := 1
+    else
+        sessionUpCount += isUp ? 1 : 0
+        sessionDownCount += isDown ? 1 : 0
+        sessionNeutralCount += showNeutral and not isUp and not isDown ? 1 : 0
+        barsInSession += 1
+
+    finalUpCount := sessionUpCount
+    finalDownCount := sessionDownCount
+    finalNeutralCount := sessionNeutralCount
+    finalTotalCount := barsInSession
+    modeLabel := "System Mode"
+    modeValue := systemMode + " (" + str.tostring(barsInSession) + " Candles)"
+
+// Check for data validity based on the minimum candles input.
+bool dataIsValid = systemMode == "Standard" or finalTotalCount >= minCandles
+
+// Calculate final percentages for display.
+float totalForCalc = finalTotalCount > 0 ? finalTotalCount : 1
+float finalUpPerc = (finalUpCount / totalForCalc) * 100
+float finalDownPerc = (finalDownCount / totalForCalc) * 100
+float finalNeutralPerc = (finalNeutralCount / totalForCalc) * 100
+
+// =============================================================================
+//                                TABLE DRAWING
+// =============================================================================
+
+if (barstate.islast)
+    // Define table dimensions.
+    int NUM_COLUMNS = 2
+    int NUM_ROWS = 7
+    var table hud = table.new(position.top_right, NUM_COLUMNS, NUM_ROWS, border_width = 0)
+    
+    // Set table position based on user input.
+    var pos = position.top_right
+    switch tablePosition
+        "top_left" => pos := position.top_left
+        "bottom_right" => pos := position.bottom_right
+        "bottom_left" => pos := position.bottom_left
+        => pos
+    hud.set_position(pos)
+    
+    // Clear table before redrawing.
+    hud.clear(0, 0, NUM_COLUMNS - 1, NUM_ROWS - 1)
+
+    int row_idx = 0
+
+    // Row 0: Header
+    f_cell_simple(hud, 0, row_idx, syminfo.ticker, text.align_left, color.new(color.blue, 50))
+    f_cell_simple(hud, 1, row_idx, "Frame: " + timeframe.period, text.align_right, color.new(color.blue, 50))
+    row_idx += 1
+
+    // Row 1: Smart Mode Display
+    f_cell_simple(hud, 0, row_idx, modeLabel, text.align_left, na)
+    f_cell_simple(hud, 1, row_idx, modeValue, text.align_right, na)
+    row_idx += 1
+    
+    // Prepare display text based on data validity.
+    string upText = dataIsValid ? str.format("{0,number,integer} ({1,number,.2f}%)", finalUpCount, finalUpPerc) : "N/A"
+    string downText = dataIsValid ? str.format("{0,number,integer} ({1,number,.2f}%)", finalDownCount, finalDownPerc) : "N/A"
+    string neutralText = dataIsValid ? str.format("{0,number,integer} ({1,number,.2f}%)", finalNeutralCount, finalNeutralPerc) : "N/A"
+    string statusText = dataIsValid ? f_get_status_text(finalUpPerc, finalDownPerc) : "Awaiting Data..."
+
+    // Prepare background colors based on data validity.
+    color upBgColor = dataIsValid ? f_get_bias_color(finalUpPerc, true) : na
+    color downBgColor = dataIsValid ? f_get_bias_color(finalDownPerc, false) : na
+    color neutralBgColor = dataIsValid ? equilibriumColor : na
+
+    // Row 2: Up Candles Data
+    f_cell_simple(hud, 0, row_idx, "↑ Up Candles", text.align_left, na)
+    f_cell_simple(hud, 1, row_idx, upText, text.align_right, upBgColor)
+    row_idx += 1
+    
+    // Row 3: Down Candles Data
+    f_cell_simple(hud, 0, row_idx, "↓ Down Candles", text.align_left, na)
+    f_cell_simple(hud, 1, row_idx, downText, text.align_right, downBgColor)
+    row_idx += 1
+    
+    // Row 4: Neutral Candles Data (Conditional)
+    if (showNeutral)
+        f_cell_simple(hud, 0, row_idx, "- Neutral Candles", text.align_left, na)
+        f_cell_simple(hud, 1, row_idx, neutralText, text.align_right, neutralBgColor)
+        row_idx += 1
+    
+    // Final Row: Status
+    f_cell_simple(hud, 0, row_idx, "Status", text.align_left, na)
+    f_cell_simple(hud, 1, row_idx, statusText, text.align_right, na)
